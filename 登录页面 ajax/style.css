@@ -1,0 +1,52 @@
+*{
+	margin:0;
+	padding:0;
+	font-size:20px;
+	list-style-type:none;
+	text-decoration:none;
+}
+#logo{
+	width:166px;
+	height:80px;
+	margin:50px auto ;
+	text-align:center;
+}
+#input{
+    width:400px;
+	height:200px;
+	margin:0 auto ;
+	text-align:center;
+}
+#footer{
+	width:500px;
+	height:10px;
+	margin:150px auto ;
+	text-align:center;
+	font-size:20px;
+}
+input{   
+    width: 278px;   
+    height: 30px;    
+    font-size: 13px; 
+	border-radius: 5px;  
+}   
+#input table {
+	border-radius: 5px;
+}
+#input #submit {
+	background-color:#3089DA;    
+    color: #fff;  
+}
+#input #admin {
+	background:url(images/admin.jpg) no-repeat right bottom;
+	background-color:#FFFFFF;
+}
+#input #password {
+	background:url(images/password.jpg) no-repeat right bottom;
+	background-color:#FFFFFF;
+}
+
+input:focus{
+    border-style:solid;
+	border-color:#0080FF;
+}

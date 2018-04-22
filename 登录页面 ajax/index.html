@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+console.log("意见或建议：");
+console.log("e-mail:449030760@qq.com wechat:r44930760");
+var xmlHttp;  //声明一个空对象用来装入XMLHttpRequest
+function createXmlHttpRequest() {  
+    if(window.XMLHttpRequest) {  //除IE5 IE6 以外的浏览器XMLHttpRequest是window的子对象
+        xmlHttp = new XMLHttpRequest();  
+    } else if(window.ActiveXObject) {  //IE5 IE6是以ActiveXObject的方式引入XMLHttpRequest的
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");  
+    }   
+}  
+              
+//发起登录请求  
+function login() {  
+    createXmlHttpRequest();  
+    var name = document.getElementById("admin").value;  
+    var password = document.getElementById("password").value;  
+    if(name == null || name == "") {  
+       	show1() ; 
+        return;  
+    }  
+    if(password == null || password == "") {  
+        show2();  
+        return;  
+    }         
+    var url = "login.php";  //设定URL地址
+    xmlHttp.open("POST", url, true);  //用"POST"方式发送数据,可以大到4MB,在接收页面使用Request.Form["..."]获取
+    xmlHttp.onreadystatechange = handleResult;  //当 readyState 等于 4 且状态为 200 时，表示响应已就绪
+    xmlHttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');//Content-Type头信息 
+    xmlHttp.send("action=login&admin=" + name + "&password=" + password);  //传递参数用的,但是只有在使用post方式提交请求的时候才有用
+}  
+  
+//处理服务器返回的结果/更新页面  
+function handleResult() {  
+    if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {  //请求成功并成功返回
+        var response = xmlHttp.responseText; //php验证完成后的数据 
+        var json = eval('(' + response + ')');// json字符串转json对象       
+        if(json['login_result']) {  
+     		show4();
+        } else {  
+            show3(); 
+        }  
+    }  
+}  
+function show1(){
+   	document.getElementById("div1").style.display="block";
+}
+function show2(){
+	document.getElementById("div2").style.display="block";
+}
+function show3(){
+	document.getElementById("div3").style.display="block";
+}
+function show4(){
+	document.getElementById("div4").style.display="block";
+}
+
+function hidden2(){
+	document.getElementById("div1").style.display="none";
+	document.getElementById("div2").style.display="none";
+	document.getElementById("div3").style.display="none";
+}
+</script>
+<title>登录页面</title>
+
+</head>
+
+<div id="logo">
+	<a href="file:///C|/Users/john/Desktop/mywork/首页/index.html" title=""><img src="images/logo.jpg" ></a>
+</div>
+<div id="input">
+  		<form name="form1" style="position:absolute;">
+	     <table width="400" border="0" cellspacing="5" cellpadding="10" bgcolor="#F7F7F7">
+  <tr>
+    <td height="66">
+        <input id="admin" type="text" name="admin" placeholder="admin"   />
+    </td>
+  </tr>
+  <tr>
+    <td height="66">
+      <input id="password" type="password" name="passwprd" placeholder="Password"    />
+    </td>
+  </tr>
+  <tr>
+    <td height="66">
+      <input id="submit" type="button" name="submit" value="Login" onClick="login()" />
+    </td>
+  </tr>
+</table>
+ </form>
+<div id="div1" style="display:none;position:absolute;left:500px;top:205px;height:30px;width:300px;color:red;"  onclick="hidden2();">
+						<strong>请输入用户名</strong></div>
+<div id="div2" style="display:none;position:absolute;left:500px;top:275px;height:30px;width:300px;color:red;" onclick="hidden2();">
+						<strong>请输入密码</strong></div>
+<div id="div3" style="display:none;position:absolute;left:500px;top:275px;height:30px;width:300px;color:red;" onclick="hidden2();">
+						<strong>密码或用户名错误</strong></div>
+<div id="div4" style="display:none;position:absolute;left:500px;top:275px;height:30px;width:300px;color:red;" onclick="hidden2();">
+						<strong>登录成功</strong></div>
+
+</body>
+</div>
+<div id="footer"><p class="STYLE4">&copy;2017 HP Development Company L.P.</p>
+</div>
+
+</html>
